@@ -1,14 +1,15 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link, useLocation } from 'react-router-dom'
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'About', href: '#', current: false },
-  { name: 'Sermon', href: '#', current: false },
-  { name: 'Sermon', href: '#', current: false },
-  { name: 'Events', href: '#', current: false },
-  { name: 'Contact', href: '#', current: false },
-
+  { name: 'Home', href: '/', current: true },
+  { name: 'About', href: '/about', current: false },
+  { name: 'Services', href: '/services', current: false },
+  { name: 'Events', href: '/events', current: false },
+  { name: 'Ministries', href: '/ministries', current: false },
+  { name: 'Sermons', href: '/sermons', current: false },
+  { name: 'Contact', href: '/contact', current: false },
 ]
 
 function classNames(...classes) {
@@ -16,6 +17,8 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+  const location = useLocation();
+
   return (
     <Disclosure as="nav" className="bg-white">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -31,33 +34,35 @@ export default function Header() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <img
-                alt="Your Company"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto"
-              />
+              <Link to="/">
+                <img
+                  alt="Church Logo"
+                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                  className="h-8 w-auto"
+                />
+              </Link>
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
+                    to={item.href}
                     className={classNames(
-                      item.current ? 'text-gray-600  relative before:absolute before:bottom-0 before:w-full before:h-0.5 before:bg-black' : 'text-gray-400  hover:text-gray-600',
-                      'py-2 text-sm font-medium',
+                      location.pathname === item.href ? 'text-gray-600 relative before:absolute before:bottom-0 before:w-full before:h-0.5 before:bg-black' : 'text-gray-400 hover:text-gray-600',
+                      'py-2 text-sm font-medium'
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button type="button" className=" bg-black p-2 text-white  hover:text-gray-500 focus:outline-none 
-            ">Give Now</button>
+            <button type="button" className="bg-black p-2 text-white hover:bg-gray-800 focus:outline-none rounded-md">
+              Give Now
+            </button>
           </div>
         </div>
       </div>
@@ -67,12 +72,11 @@ export default function Header() {
           {navigation.map((item) => (
             <DisclosureButton
               key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={item.current ? 'page' : undefined}
+              as={Link}
+              to={item.href}
               className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
+                location.pathname === item.href ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                'block rounded-md px-3 py-2 text-base font-medium'
               )}
             >
               {item.name}
