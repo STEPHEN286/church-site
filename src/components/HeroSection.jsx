@@ -2,20 +2,34 @@ import React from 'react'
 
 const HeroSection = ({ 
   image, 
+  video,
   title, 
   description, 
   buttons = [], 
-  height = "70vh",
+  className,
   opacity = "30"
 }) => {
   return (
-    <section className={`h-[${height}] bg-black relative`}>
-      <div className='absolute inset-0 w-full h-full'>
-        <img 
-          src={image} 
-          alt={title} 
-          className={`w-full h-full object-cover opacity-${opacity}`}
-        />
+    <section className={ `${className} bg-black relative`}>
+      <div className='absolute inset-0 w-full h-full overflow-hidden'>
+        {video ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={`w-full h-full object-cover opacity-${opacity}`}
+          >
+            <source src={video} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <img 
+            src={image} 
+            alt={title} 
+            className={`w-full h-full object-cover opacity-${opacity}`}
+          />
+        )}
       </div>
       <div className='container mx-auto h-full relative z-10'>
         <div className='flex flex-col items-center justify-center h-full gap-6'>

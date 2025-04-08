@@ -1,6 +1,7 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
-import Card from '../components/ui/Card';
+import EventCard from '../components/ui/EventCard';
+import { CalendarIcon, ArrowDownTrayIcon } from '@heroicons/react/24/solid';
 
 const Events = () => {
   const events = [
@@ -54,44 +55,55 @@ const Events = () => {
     }
   ];
   
- 
+  const calendarLinks = [
+    {
+      id: 1,
+      name: "Google Calendar",
+      url: "https://calendar.google.com/calendar/ical/your-calendar-id/public/basic.ics",
+      icon: <CalendarIcon className="w-6 h-6" />
+    },
+    {
+      id: 2,
+      name: "Apple Calendar",
+      url: "https://calendar.google.com/calendar/ical/your-calendar-id/public/basic.ics",
+      icon: <CalendarIcon className="w-6 h-6" />
+    },
+    {
+      id: 3,
+      name: "Outlook Calendar",
+      url: "https://calendar.google.com/calendar/ical/your-calendar-id/public/basic.ics",
+      icon: <CalendarIcon className="w-6 h-6" />
+    }
+  ];
   
   const eventHeroImage = "https://www.vancopayments.com/hs-fs/hubfs/Church%20Fellowship%20Event%20-%20Concert.jpg?width=1200&height=801&name=Church%20Fellowship%20Event%20-%20Concert.jpg";
+  
   return (
-    <div className="min-h-screen bg-gray-50  ">
+    <div className="min-h-screen bg-gray-50">
       <HeroSection
         image={eventHeroImage}
         title="Church Events"
-        description="Church Events
-Church Events
-Join us for our upcoming events and be part of our growing community."
-        // buttons={heroButtons}
-        height="70vh"
+        description="Join us for our upcoming events and be part of our growing community."
+        className="h-[70vh]"
         opacity="30"
       />
-      <div className="max-w-7xl mx-auto py-24 ">
+      <div className="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-semibold text-gray-900 mb-6">Upcoming Events</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {events.slice(0, 8).map((event, index) => (
-            <Card key={index} image={event.image} title={event.title} date={event.date} description={event.description} />
+          {events.map((event) => (
+            <EventCard
+              key={event.id}
+              image={event.image}
+              title={event.title}
+              date={event.date}
+              time={event.time}
+              description={event.description}
+            />
           ))}
         </div>
 
-        <div className="mt-16 bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Event Calendar</h2>
-          <p className="text-gray-600 mb-4">
-            Want to stay updated on all our events? Subscribe to our church calendar or download our mobile app.
-          </p>
-          <div className="flex space-x-4">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-              Subscribe to Calendar
-            </button>
-            <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
-              Download App
-            </button>
-          </div>
-        </div>
+       
       </div>
     </div>
   );

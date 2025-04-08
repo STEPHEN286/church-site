@@ -13,7 +13,6 @@ import Sermons from "./pages/Sermons"
 import Card from './components/ui/Card';
 import MinistryIconCard from './components/ui/MinistryIconCard';
 import pastor from "./assets/img/pastor.jpg"
-import churchBg from "./assets/img/home-hero.jpg"
 
 const upcomingEvents = [
   {
@@ -82,11 +81,11 @@ function App() {
         <Route path="/" element={
           <>
             <HeroSection
-              image={churchBg}
+              video="https://videos.pexels.com/video-files/5949379/5949379-hd_1920_1080_24fps.mp4"
               title="Welcome to Grace Community Church"
               description="We are a community of believers who are passionate about Jesus Christ and the Bible."
               buttons={homeHeroButtons}
-              height="90vh"
+              className="h-[600px]"
               opacity="20"
             />
             <ShortInfo image={pastor}>
