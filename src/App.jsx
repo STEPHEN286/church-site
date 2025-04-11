@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserIcon, UsersIcon, MusicalNoteIcon, HandRaisedIcon } from '@heroicons/react/24/solid';
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 import HeroSection from "./components/HeroSection"
 import ShortInfo from "./components/ShortInfo"
 import CardsWrapper from "./components/CardsWrapper"
@@ -76,68 +77,73 @@ const homeHeroButtons = [
 function App() {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={
-          <>
-            <HeroSection
-              video="https://videos.pexels.com/video-files/5949379/5949379-hd_1920_1080_24fps.mp4"
-              title="Welcome to Grace Community Church"
-              description="We are a community of believers who are passionate about Jesus Christ and the Bible."
-              buttons={homeHeroButtons}
-              className="h-[600px]"
-              opacity="20"
-            />
-            <ShortInfo image={pastor}>
-              <div className='flex flex-col gap-3'>
-                <h1 className='text-2xl font-bold'>"Finding Peace in Troubled Times"</h1>
-                <p className='text-gray-400'>Join Pastor Michael Thomson as he explores how we can find true peace through faith, even in life's most challenging moments.</p>
-                <span className='flex gap-2'>
-                  <button className='bg-black text-white px-4 py-2'>Join Us</button>
-                  <button className='border px-4 py-2'>Learn More</button>
-                </span>
-              </div>
-            </ShortInfo>
-            
-            <CardsWrapper 
-              title="Upcoming Events" 
-              bgColor="bg-white" 
-              className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {upcomingEvents.map((event) => (
-                <Card 
-                  key={event.id} 
-                  image={event.image} 
-                  title={event.title} 
-                  date={event.date}
-                  description={event.description}
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={
+              <>
+                <HeroSection
+                  video="https://videos.pexels.com/video-files/5949379/5949379-hd_1920_1080_24fps.mp4"
+                  title="Welcome to Grace Community Church"
+                  description="We are a community of believers who are passionate about Jesus Christ and the Bible."
+                  buttons={homeHeroButtons}
+                  className="h-[600px]"
+                  opacity="20"
                 />
-              ))}
-            </CardsWrapper>
+                <ShortInfo image={pastor}>
+                  <div className='flex flex-col gap-3'>
+                    <h1 className='text-2xl font-bold'>"Finding Peace in Troubled Times"</h1>
+                    <p className='text-gray-400'>Join Pastor Michael Thomson as he explores how we can find true peace through faith, even in life's most challenging moments.</p>
+                    <span className='flex gap-2'>
+                      <button className='bg-black text-white px-4 py-2'>Join Us</button>
+                      <button className='border px-4 py-2'>Learn More</button>
+                    </span>
+                  </div>
+                </ShortInfo>
+                
+                <CardsWrapper 
+                  title="Upcoming Events" 
+                  bgColor="bg-white" 
+                  className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  {upcomingEvents.map((event) => (
+                    <Card 
+                      key={event.id} 
+                      image={event.image} 
+                      title={event.title} 
+                      date={event.date}
+                      description={event.description}
+                    />
+                  ))}
+                </CardsWrapper>
 
-            <CardsWrapper 
-              title="Our Ministries"
-              bgColor="bg-gray-50" 
-              className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-            >
-              {ministries.map((ministry) => (
-                <MinistryIconCard 
-                  key={ministry.id} 
-                  icon={ministry.icon} 
-                  title={ministry.title} 
-                  description={ministry.description} 
-                />
-              ))}
-            </CardsWrapper>
-          </>
-        } />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/ministries" element={<Ministries />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/sermons" element={<Sermons />} />
-      </Routes>
+                <CardsWrapper 
+                  title="Our Ministries"
+                  bgColor="bg-gray-50" 
+                  className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                >
+                  {ministries.map((ministry) => (
+                    <MinistryIconCard 
+                      key={ministry.id} 
+                      icon={ministry.icon} 
+                      title={ministry.title} 
+                      description={ministry.description} 
+                    />
+                  ))}
+                </CardsWrapper>
+              </>
+            } />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/ministries" element={<Ministries />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/sermons" element={<Sermons />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   )
 }
